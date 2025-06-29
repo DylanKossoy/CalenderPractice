@@ -1,0 +1,366 @@
+/* font */
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&display=swap");
+
+
+/* #region reset */
+
+/* https://piccalil.li/blog/a-more-modern-css-reset/ */
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Prevent font size inflation */
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+/* Remove default margin in favour of better control in authored CSS */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin-block-end: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* Set shorter line heights on headings and interactive elements */
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+  line-height: 1.1;
+}
+
+/* Balance text wrapping on headings */
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+  color: currentColor;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Make sure textareas without a rows attribute are not tiny */
+textarea:not([rows]) {
+  min-height: 10em;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+  scroll-margin-block: 5ex;
+}
+/* #endregion */
+
+
+
+
+
+:root {
+    --body-background-color: rgb(0, 0, 0);
+    --calender-background-color: rgba(0, 255, 255, 0.366);
+    --primary-font: 'Orbitron', 'sans-serif';
+}
+
+
+
+body {
+    background: var(--body-background-color);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+
+
+
+
+/* Calender backdrop */
+
+.calender-container {
+    width: 98vw;
+    height: 95vh;
+    background: var(--calender-background-color);
+    backdrop-filter: blur(1px);
+    box-shadow: 0 0 10px 0 cyan;
+    padding-top: 4rem;
+    position: relative;
+    
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    height: 100%;
+}
+
+.calender-cell {
+    width: 100%;
+    height: 100%;
+    border: 1px solid cyan;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.calender-cell:hover {
+  background: rgba(0, 255, 255, 0.157);
+}
+
+.calender-cell:focus {
+  background: rgba(255, 0, 0, 0.308);
+}
+
+
+.calender-cell-number {
+    font-family: var(--primary-font);
+    font-size: 25px;
+    color: white;
+}
+
+
+.calender-date-container {
+    position: absolute; 
+    top: 0;
+    right: 40%;
+    width: 400px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calender-date-month {
+    font-family: var(--primary-font);
+    color: white;
+    font-size: 30px;
+}
+
+
+.month-left, .month-right {
+    background: none;
+    border: none;
+    font-family: var(--primary-font);
+    color: white;
+    margin-inline: 1rem;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.month-left:hover, .month-right:hover {
+  color: rgb(173, 113, 113);
+}
+
+
+.today {
+  background: rgba(255, 0, 0, 0.308);
+
+}
+
+
+
+.showModal {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.523);
+  position: absolute;
+  z-index: 1;
+  backdrop-filter: blur(5px);
+  top: 0;
+  left: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.event-container {
+  width: 900px;
+  height: 600px;
+  background: rgb(2, 87, 87);
+  border-radius: 10px;
+  display: flex;
+}
+
+
+.event-left-container {
+  width: 50%;
+  height: 100%;
+  
+ 
+}
+
+.event-right-container {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.617);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  overflow-y: auto;
+
+}
+
+
+
+
+
+
+
+
+
+.event-left-top-container {
+  width: 100%;
+  height: 60px;
+  padding: 1rem;
+  padding-left: 1.5rem;
+}
+
+
+.event-month-header {
+  font-family: var(--primary-font);
+  font-size: 25px;
+  color: white;
+}
+
+.event-left-bottom-container {
+  width: 100%;
+  height: calc(100% - 60px);
+ 
+  padding: 1rem;
+  display: flex;
+  position: relative;
+}
+
+.add-event-button {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+
+  width: 100px;
+  height: 40px;
+  font-family: var(--primary-font);
+  background: rgba(3, 161, 169, 0.518);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+
+}
+
+
+.add-event-button:hover {
+  background: rgba(178, 156, 156, 0.246);
+}
+
+
+.event-add-input {
+  width: 100%;
+  font-family: var(--primary-font);
+  padding: 1rem;
+  border: none;
+  background: rgba(0, 0, 0, 0.523);
+  font-size: 20px;
+  box-shadow: 0 0 10px 0 cyan;
+  color: white;
+}
+
+.event-add-input:focus {
+  border: none;
+  outline: none;
+  box-shadow: 0 0 20px 0 cyan;
+}
+
+.event-cell {
+  width: 100%;
+  min-height: 50px;
+  max-height: 50px;
+  background: rgba(9, 145, 145, 0.238);
+  padding-left: 1rem;
+  margin-block: 0.5rem;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  border-left: 4px solid cyan;
+}
+
+
+.event-cell-label {
+  
+ 
+  font-size: 15px;
+  font-family: var(--primary-font);
+  color: white;
+  overflow-x: auto;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  
+}
+
+
+.exit-button {
+  background: none;
+  border: none;
+  font-family: var(--primary-font);
+  color: rgb(185, 109, 109);
+  font-size: 30px;
+  margin-right: 2rem;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
